@@ -6,9 +6,11 @@ informações de Pokémons pelo nome ou número.
 ## Funcionalidades
 
 - Busca de Pokémon por nome ou ID.
-- Exibição de sprite, tipos e estatísticas base.
+- Exibição de sprite, tipos, altura, peso, experiência base, habilidades e
+  estatísticas base.
 - Tratamento de erros: Pokémon não encontrado (404) e falha de conexão de rede.
 - Indicador de carregamento durante a requisição.
+- Visual temático (paleta amarelo/azul e fundo com padrão de pokébolas).
 
 ## Arquitetura
 
@@ -31,7 +33,8 @@ informações de Pokémons pelo nome ou número.
   - `TypeError` (lançado pelo próprio `fetch` quando a rede falha) → mensagem
     de falha de conexão.
 - `renderPokemon(data)`: recebe o JSON da API e atualiza o DOM (imagem, nome,
-  tipos e estatísticas), criando os elementos dinamicamente.
+  tipos, altura, peso, experiência base, habilidades e estatísticas), criando
+  os elementos dinamicamente.
 - `showFeedback` / `setLoading`: controlam mensagens de status e o estado do
   botão de busca durante a requisição.
 

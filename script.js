@@ -10,6 +10,10 @@ const nameEl = document.getElementById("pokemon-name");
 const idEl = document.getElementById("pokemon-id");
 const typesEl = document.getElementById("pokemon-types");
 const statsEl = document.getElementById("pokemon-stats");
+const heightEl = document.getElementById("pokemon-height");
+const weightEl = document.getElementById("pokemon-weight");
+const experienceEl = document.getElementById("pokemon-experience");
+const abilitiesEl = document.getElementById("pokemon-abilities-list");
 
 form.addEventListener("submit", handleSearch);
 
@@ -67,6 +71,13 @@ function renderPokemon(pokemon) {
     li.textContent = typeInfo.type.name;
     typesEl.appendChild(li);
   });
+
+  heightEl.textContent = `${(pokemon.height / 10).toFixed(1)} m`;
+  weightEl.textContent = `${(pokemon.weight / 10).toFixed(1)} kg`;
+  experienceEl.textContent = pokemon.base_experience ?? "N/A";
+  abilitiesEl.textContent = pokemon.abilities
+    .map((abilityInfo) => abilityInfo.ability.name.replace("-", " "))
+    .join(", ");
 
   statsEl.innerHTML = "";
   pokemon.stats.forEach((statInfo) => {
