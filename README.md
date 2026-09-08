@@ -1,22 +1,20 @@
-# Países do Mundo - Consumo de API com HTML, CSS e JavaScript
+# Pokédex - Consumo de API com HTML, CSS e JavaScript
 
-Aplicação simples que consome a [REST Countries API](https://restcountries.com/)
-para buscar informações de países pelo nome.
+Aplicação simples que consome a [PokéAPI](https://pokeapi.co/) para buscar
+informações de Pokémons pelo nome ou número.
 
 ## Funcionalidades
 
-- Busca de países por nome (aceita nomes parciais, ex: "united" retorna vários
-  resultados).
-- Exibição de bandeira, nome oficial, capital, região, sub-região, população e
-  idiomas.
-- Tratamento de erros: país não encontrado (404) e falha de conexão de rede.
+- Busca de Pokémon por nome ou ID.
+- Exibição de sprite, tipos e estatísticas base.
+- Tratamento de erros: Pokémon não encontrado (404) e falha de conexão de rede.
 - Indicador de carregamento durante a requisição.
 
 ## Arquitetura
 
 ```
 .
-├── index.html   # Estrutura da página (formulário de busca + área de resultados)
+├── index.html   # Estrutura da página (formulário de busca + card de resultado)
 ├── style.css    # Estilização e layout responsivo
 └── script.js    # Lógica de consumo da API e manipulação do DOM
 ```
@@ -24,17 +22,16 @@ para buscar informações de países pelo nome.
 ### Chamadas assíncronas (`script.js`)
 
 - `handleSearch(event)`: captura o submit do formulário, valida o campo de
-  busca e dispara `searchCountries`.
-- `searchCountries(query)`: função `async` que usa `fetch` com `await` para
-  chamar `https://restcountries.com/v3.1/name/{nome}`. Erros são tratados em
-  um bloco `try/catch/finally`:
-  - `response.status === 404` → mensagem de "nenhum país encontrado".
+  busca e dispara `searchPokemon`.
+- `searchPokemon(query)`: função `async` que usa `fetch` com `await` para
+  chamar `https://pokeapi.co/api/v2/pokemon/{nome-ou-id}`. Erros são tratados
+  em um bloco `try/catch/finally`:
+  - `response.status === 404` → mensagem de "Pokémon não encontrado".
   - `!response.ok` → erro genérico de status HTTP.
   - `TypeError` (lançado pelo próprio `fetch` quando a rede falha) → mensagem
     de falha de conexão.
-- `renderCountries(countries)`: recebe o array de países retornado pela API e
-  cria um card no DOM para cada resultado (a busca por nome pode retornar
-  mais de um país).
+- `renderPokemon(data)`: recebe o JSON da API e atualiza o DOM (imagem, nome,
+  tipos e estatísticas), criando os elementos dinamicamente.
 - `showFeedback` / `setLoading`: controlam mensagens de status e o estado do
   botão de busca durante a requisição.
 
@@ -42,18 +39,18 @@ para buscar informações de países pelo nome.
 
 1. Clone o repositório.
 2. Abra o arquivo `index.html` diretamente no navegador (não é necessário
-   servidor ou build step, pois a REST Countries API permite requisições CORS
-   do navegador e não exige chave de autenticação).
+   servidor ou build step, pois a PokéAPI permite requisições CORS do
+   navegador).
 
 ## API utilizada
 
-- **REST Countries API** — https://restcountries.com/
-- Endpoint: `GET /v3.1/name/{name}`
+- **PokéAPI** — https://pokeapi.co/
+- Endpoint: `GET /api/v2/pokemon/{name-or-id}`
 - Não requer chave de autenticação.
 
 ## Testando erros
 
-- Buscar um nome inexistente (ex: `xyzland`) para ver o tratamento de "não
+- Buscar um nome inexistente (ex: `abcxyz`) para ver o tratamento de "não
   encontrado".
 - Desativar a conexão de internet antes de buscar para ver o tratamento de
   falha de rede.
