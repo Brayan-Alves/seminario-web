@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokédex - Consumo de API</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Pokédex</h1>
+    <p>Busque um Pokémon pelo nome ou número usando a <a href="https://pokeapi.co" target="_blank" rel="noopener">PokéAPI</a></p>
+  </header>
+
+  <main>
+    <form id="search-form" autocomplete="off">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Ex: pikachu ou 25"
+        aria-label="Nome ou número do Pokémon"
+      />
+      <button type="submit" id="search-button">Buscar</button>
+    </form>
+
+    <section id="feedback" aria-live="polite"></section>
+
+    <section id="card-container" hidden>
+      <img id="pokemon-sprite" src="" alt="" />
+      <div id="pokemon-info">
+        <h2 id="pokemon-name"></h2>
+        <span id="pokemon-id"></span>
+        <ul id="pokemon-types"></ul>
+        <dl id="pokemon-stats"></dl>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Seminário - Consumo de API com HTML, CSS e JavaScript</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
