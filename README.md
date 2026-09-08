@@ -6,8 +6,9 @@ informações de Pokémons pelo nome ou número.
 ## Funcionalidades
 
 - Busca de Pokémon por nome ou ID.
-- Exibição de sprite, tipos, altura, peso, experiência base, habilidades e
-  estatísticas base.
+- Exibição de sprite, tipos, altura, peso e estatísticas base.
+- Navegação lateral: mostra o Pokémon anterior (ID - 1) e o próximo (ID + 1)
+  ao lado do resultado buscado, clicáveis para trocar a busca.
 - Tratamento de erros: Pokémon não encontrado (404) e falha de conexão de rede.
 - Indicador de carregamento durante a requisição.
 - Visual temático (paleta amarelo/azul e fundo com padrão de pokébolas).
@@ -25,16 +26,19 @@ informações de Pokémons pelo nome ou número.
 
 - `handleSearch(event)`: captura o submit do formulário, valida o campo de
   busca e dispara `searchPokemon`.
-- `searchPokemon(query)`: função `async` que usa `fetch` com `await` para
+- `fetchPokemon(query)`: função `async` que usa `fetch` com `await` para
   chamar `https://pokeapi.co/api/v2/pokemon/{nome-ou-id}`. Erros são tratados
-  em um bloco `try/catch/finally`:
+  em quem a chama, com `try/catch/finally`:
   - `response.status === 404` → mensagem de "Pokémon não encontrado".
   - `!response.ok` → erro genérico de status HTTP.
   - `TypeError` (lançado pelo próprio `fetch` quando a rede falha) → mensagem
     de falha de conexão.
+- `renderNeighbors(currentId)`: busca em paralelo (`Promise.all`) o Pokémon
+  de ID-1 e ID+1 e preenche os botões laterais; falhas nessas buscas (ex.:
+  ID inválido) apenas escondem o botão correspondente, sem quebrar a busca
+  principal.
 - `renderPokemon(data)`: recebe o JSON da API e atualiza o DOM (imagem, nome,
-  tipos, altura, peso, experiência base, habilidades e estatísticas), criando
-  os elementos dinamicamente.
+  tipos, altura, peso e estatísticas), criando os elementos dinamicamente.
 - `showFeedback` / `setLoading`: controlam mensagens de status e o estado do
   botão de busca durante a requisição.
 

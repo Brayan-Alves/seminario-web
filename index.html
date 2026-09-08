@@ -25,20 +25,24 @@
 
     <section id="feedback" aria-live="polite"></section>
 
-    <section id="card-container" hidden>
-      <img id="pokemon-sprite" src="" alt="" />
-      <div id="pokemon-info">
-        <h2 id="pokemon-name"></h2>
-        <span id="pokemon-id"></span>
-        <ul id="pokemon-types"></ul>
-        <div id="pokemon-physical">
-          <span>Altura: <strong id="pokemon-height"></strong></span>
-          <span>Peso: <strong id="pokemon-weight"></strong></span>
-          <span>XP base: <strong id="pokemon-experience"></strong></span>
+    <section id="pokemon-display" hidden>
+      <button type="button" id="prev-pokemon" class="side-pokemon" aria-label="Pokémon anterior"></button>
+
+      <div id="card-container">
+        <img id="pokemon-sprite" src="" alt="" />
+        <div id="pokemon-info">
+          <h2 id="pokemon-name"></h2>
+          <span id="pokemon-id"></span>
+          <ul id="pokemon-types"></ul>
+          <div id="pokemon-physical">
+            <span>Altura: <strong id="pokemon-height"></strong></span>
+            <span>Peso: <strong id="pokemon-weight"></strong></span>
+          </div>
+          <dl id="pokemon-stats"></dl>
         </div>
-        <p id="pokemon-abilities">Habilidades: <strong id="pokemon-abilities-list"></strong></p>
-        <dl id="pokemon-stats"></dl>
       </div>
+
+      <button type="button" id="next-pokemon" class="side-pokemon" aria-label="Próximo pokémon"></button>
     </section>
   </main>
 
