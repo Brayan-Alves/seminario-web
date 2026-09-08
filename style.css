@@ -180,13 +180,24 @@ main {
   flex: 1;
   min-width: 0;
   max-width: 320px;
-  background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 1.75rem 1.5rem;
+  padding: 7px;
   box-shadow: 0 6px 20px rgba(59, 76, 202, 0.15);
+  background: linear-gradient(
+    135deg,
+    var(--type-color-1, var(--primary)) 0%,
+    var(--type-color-1, var(--primary)) 50%,
+    var(--type-color-2, var(--primary)) 50%,
+    var(--type-color-2, var(--primary)) 100%
+  );
+  transition: background 0.25s ease;
+}
+
+#card-inner {
+  background: var(--card-bg);
+  border-radius: calc(var(--radius) - 5px);
+  padding: 1.5rem 1.25rem;
   text-align: center;
-  border: 3px solid var(--primary);
-  position: relative;
 }
 
 #pokemon-sprite {

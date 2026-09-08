@@ -1,5 +1,26 @@
 const API_BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
+const TYPE_COLORS = {
+  normal: "#A8A878",
+  fire: "#F08030",
+  water: "#6890F0",
+  electric: "#F8D030",
+  grass: "#78C850",
+  ice: "#98D8D8",
+  fighting: "#C03028",
+  poison: "#A040A0",
+  ground: "#E0C068",
+  flying: "#A890F0",
+  psychic: "#F85888",
+  bug: "#A8B820",
+  rock: "#B8A038",
+  ghost: "#705898",
+  dragon: "#7038F8",
+  dark: "#705848",
+  steel: "#B8B8D0",
+  fairy: "#EE99AC",
+};
+
 const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
 const button = document.getElementById("search-button");
@@ -110,6 +131,14 @@ function renderSideButton(buttonEl, pokemon) {
   buttonEl.append(img, name);
 }
 
+function applyTypeTheme(typeNames) {
+  const color1 = TYPE_COLORS[typeNames[0]] ?? "#ffcb05";
+  const color2 = TYPE_COLORS[typeNames[1]] ?? color1;
+
+  cardContainer.style.setProperty("--type-color-1", color1);
+  cardContainer.style.setProperty("--type-color-2", color2);
+}
+
 function renderPokemon(pokemon) {
   sprite.src = pokemon.sprites.front_default ?? "";
   sprite.alt = pokemon.name;
@@ -121,8 +150,11 @@ function renderPokemon(pokemon) {
   pokemon.types.forEach((typeInfo) => {
     const li = document.createElement("li");
     li.textContent = typeInfo.type.name;
+    li.style.backgroundColor = TYPE_COLORS[typeInfo.type.name] ?? "var(--primary-dark)";
     typesEl.appendChild(li);
   });
+
+  applyTypeTheme(pokemon.types.map((typeInfo) => typeInfo.type.name));
 
   heightEl.textContent = `${(pokemon.height / 10).toFixed(1)} m`;
   weightEl.textContent = `${(pokemon.weight / 10).toFixed(1)} kg`;
