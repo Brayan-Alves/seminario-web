@@ -23,6 +23,7 @@ const TYPE_COLORS = {
 
 const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
+const response = await fetch(`${API_BASE_URL}/${query}`);
 const button = document.getElementById("search-button");
 const feedback = document.getElementById("feedback");
 const displaySection = document.getElementById("pokemon-display");
