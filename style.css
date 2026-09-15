@@ -130,6 +130,10 @@ main {
   gap: 1rem;
 }
 
+#pokemon-display[hidden] {
+  display: none;
+}
+
 .side-pokemon {
   flex-shrink: 0;
   width: 96px;
